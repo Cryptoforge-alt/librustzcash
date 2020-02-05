@@ -646,7 +646,7 @@ impl<R: RngCore + CryptoRng> Builder<R> {
                 let (sig, _) = secp256k1::sign(&msg, &info.sk);
 
                 // Signature has to have "SIGHASH_ALL" appended to it
-                let mut sig_bytes: Vec<u8> = sig.serialize_der()[..].to_vec();
+                let mut sig_bytes: Vec<u8> = sig.serialize_der().as_ref().to_vec();
                 sig_bytes.extend(&[SIGHASH_ALL as u8]);
 
                 // P2PKH scriptSig
