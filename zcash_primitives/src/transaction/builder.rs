@@ -162,7 +162,7 @@ impl SaplingOutput {
 #[cfg(feature = "transparent-inputs")]
 struct TransparentInputInfo {
     sk: secp256k1::SecretKey,
-    pubkey: [u8; 33],
+    pubkey: [u8; 65],
     coin: TxOut,
 }
 
@@ -643,7 +643,7 @@ impl<R: RngCore + CryptoRng> Builder<R> {
                 ));
 
                 let msg = secp256k1::Message::parse_slice(&sighash).expect("32 bytes");
-                let sig = secp256k1::sign(&msg, &info.sk);
+                let (sig, _) = secp256k1::sign(&msg, &info.sk);
 
                 // Signature has to have "SIGHASH_ALL" appended to it
                 let mut sig_bytes: Vec<u8> = sig.serialize_der()[..].to_vec();
