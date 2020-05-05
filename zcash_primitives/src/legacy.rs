@@ -96,7 +96,7 @@ impl Shl<&[u8]> for Script {
 }
 
 /// A transparent address corresponding to either a public key or a `Script`.
-#[derive(Debug, PartialEq)]
+#[derive(Clone, Debug, PartialEq)]
 pub enum TransparentAddress {
     PublicKey([u8; 20]),
     Script([u8; 20]),
