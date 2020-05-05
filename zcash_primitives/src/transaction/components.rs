@@ -86,6 +86,15 @@ pub struct TxOut {
 }
 
 impl TxOut {
+    pub fn new() -> Self {
+        let value = Amount::zero();
+        let script_pubkey = Script::default();
+        TxOut{
+            value,
+            script_pubkey
+        }
+    }
+    
     pub fn read<R: Read>(mut reader: &mut R) -> io::Result<Self> {
         let value = {
             let mut tmp = [0; 8];
